@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "rwebsite",
+    "title": "Gabriel Zangirolani",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "Researcher in the OHSU Knight Cancer Institute specializing in the development of novel methods of specialized cancer diagnosis and treatment. Laboratory and analytic techniques primarily involve spatial proteomics/transcriptomics, immunofluorescent staining and high-level imaging.\n\n\nOregon Health & Science University | Portland, OR M.S. in Biostatistics | Sept 2025 - Present\nUniversity of Massachusetts, Amherst | Amherst, MA B.S in Biochemistry & Molecular Biology | Sept 2017 - May 2021\n\n\n\nOHSU | Medical Laboratory Technician | July 2022 - present\nSeres Therapeutics | Quality Control Analyst | August 2021 - April 2022"
   },
   {
     "objectID": "about.html",
@@ -12,5 +12,19 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Gabriel Zangirolani",
+    "section": "",
+    "text": "Oregon Health & Science University | Portland, OR M.S. in Biostatistics | Sept 2025 - Present\nUniversity of Massachusetts, Amherst | Amherst, MA B.S in Biochemistry & Molecular Biology | Sept 2017 - May 2021"
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Gabriel Zangirolani",
+    "section": "",
+    "text": "OHSU | Medical Laboratory Technician | July 2022 - present\nSeres Therapeutics | Quality Control Analyst | August 2021 - April 2022"
   }
 ]

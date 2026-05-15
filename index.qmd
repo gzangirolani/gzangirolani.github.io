@@ -1,11 +1,35 @@
 ---
-title: "rwebsite"
+title: "Gabriel Zangirolani"
+image: propic.jpeg
+about:
+  template: trestles
+  links: 
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/gabriel-zangirolani-33ab2188/
+    - icon: mortarboard
+      text: Google Scholar
+      href: https://scholar.google.com/citations?user=CPaRJxsAAAAJ&hl=en
+  
 ---
 
-This is a Quarto website.
+:::{#hero-heading}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Researcher in the OHSU Knight Cancer Institute specializing in the development of novel methods of specialized cancer diagnosis and treatment. Laboratory and analytic techniques primarily involve spatial proteomics/transcriptomics, immunofluorescent staining and high-level imaging. 
 
-```{r}
-1 + 1
-```
+
+## Education
+
+Oregon Health & Science University | Portland, OR
+M.S. in Biostatistics | Sept 2025 - Present
+
+University of Massachusetts, Amherst | Amherst, MA
+B.S in Biochemistry & Molecular Biology | Sept 2017 - May 2021
+
+## Experience
+
+OHSU | Medical Laboratory Technician | July 2022 - present
+
+Seres Therapeutics | Quality Control Analyst | August 2021 - April 2022
+
+:::
