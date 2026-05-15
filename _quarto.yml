@@ -1,8 +1,9 @@
 project:
   type: website
+  output-dir: docs
 
 website:
-  title: "rwebsite"
+  title: "Gabriel Zangirolani"
   navbar:
     left:
       - href: index.qmd
