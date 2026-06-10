@@ -52,7 +52,7 @@ It would also be cool to allow the user to group regions together and perform fu
 <iframe
   src="https://psn9q0-gabriel-zangirolani.shinyapps.io/simpleshinyapp/"
   width="100%"
-  height="1000"
+  height="400"
   style="border:none;">
 </iframe>
 
