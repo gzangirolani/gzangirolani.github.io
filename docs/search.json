@@ -4,14 +4,14 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Spaghetti Plots\n\n\n\n\n\nA brief exploration of Spaghetti Plots and a real world example\n\n\n\n\n\nMay 6, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\nNo matching items"
+    "text": "Basic CosMx Explorer Tool\n\n\n\n\n\nA basic interactive tool to explore cell type proportions in CosMx Data\n\n\n\n\n\nJun 8, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\n\n\n\n\n\n\nSpaghetti Plots\n\n\n\n\n\nA brief exploration of Spaghetti Plots and a real world example\n\n\n\n\n\nMay 6, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Gabriel Zangirolani",
     "section": "",
-    "text": "Researcher in the OHSU Knight Cancer Institute specializing in the development of novel methods of specialized cancer diagnosis and treatment. Laboratory and analytic techniques primarily involve spatial proteomics/transcriptomics, immunofluorescent staining and high-level imaging.\n\n\nOregon Health & Science University | Portland, OR M.S. in Biostatistics | Sept 2025 - Present\nUniversity of Massachusetts, Amherst | Amherst, MA B.S in Biochemistry & Molecular Biology | Sept 2017 - May 2021\n\n\n\nOHSU | Medical Laboratory Technician | July 2022 - present\nSeres Therapeutics | Quality Control Analyst | August 2021 - April 2022"
+    "text": "I’m a researcher in the OHSU Knight Cancer Institute specializing in the development of novel methods of specialized cancer diagnosis and treatment. Laboratory and analytic techniques primarily involve spatial proteomics/transcriptomics, immunofluorescent staining and high-level imaging. Currently obtaining an M.S. in Biostatistics with the goal of bringing my laboratory expertise to the computational side of research at OHSU.\nWhen I’m not in the lab, you can find me tinkering with cars and motorcycles, camping in my Astro van at Hood or on the coast, building upgrades for said van, skating, snowboarding, surfing, playing guitar, or some frantic combination of all of the above.\n\n\nOregon Health & Science University | Portland, OR M.S. in Biostatistics | Sept 2025 - Present\nUniversity of Massachusetts, Amherst | Amherst, MA B.S in Biochemistry & Molecular Biology | Sept 2017 - May 2021\n\n\n\nOHSU | Medical Laboratory Technician | July 2022 - present\nSeres Therapeutics | Quality Control Analyst | August 2021 - April 2022"
   },
   {
     "objectID": "index.html#education",
@@ -61,5 +61,40 @@
     "title": "Spaghetti Plots",
     "section": "Spaghetti Variations",
     "text": "Spaghetti Variations\nThe term “spaghetti plot” actually encompasses quite a vast array of different plot types, and the feature that they all share in common is essentially colored lines corresponding to certain groups that connect data points in a shared scale.\nAnother common configuration you will find, for example, is climate data showing seasonal trends over the course of the year with different years corresponding to different colors.\nThis is an example of an interactive spaghetti plot of daily sea surface temperatures. Here is a snapshot of the plot:"
+  },
+  {
+    "objectID": "projects/basic_cosmx_tool/quartobasictool.html",
+    "href": "projects/basic_cosmx_tool/quartobasictool.html",
+    "title": "Basic CosMx Explorer Tool",
+    "section": "",
+    "text": "The CosMx Spatial Molecular Imager is a cutting-edge single-cell spatial transcriptomics and proteomics platform developed by Nanostring and later acquired by Bruker Spatial Biology. Its defining feature is the ability to detect whole transcriptome level (18,000+ plex) of RNA transcripts at subcellular resolution using cyclic in-situ hybridization of photocleavable fluorescent probe barcodes paired with digital imaging. Protein data can also be acquired, though only up to 64-plex currently.\nThe platform uses a fluorescent membrane marker to segment the cells by drawing polygons around their boundaries, then assigns the transcript counts to their respective cells. In the resulting data object, each cell contains its polygon geometry; the counts of each transcript detected within it; and any associated metadata. The subcellular X-Y coordinates of each individual transcript can be optionally included as seen in the image above, though that can result in a tremendously large data object.\nNanostring had been a pioneer in the field of spatial biology with the earlier development of the GeoMx Digital Spatial Profiler platform, which is still widely used today. This platform uses photocleavable oligonucleotide barcoding of antibodies to achieve simultaneous detection of 80+ protein targets, a massive leap from the upper limit of less than 10 which can be achieved in one round of antibody incubation through traditional immunofluorescent imaging techniques."
+  },
+  {
+    "objectID": "projects/basic_cosmx_tool/quartobasictool.html#cosmx-spatial-molecular-imager",
+    "href": "projects/basic_cosmx_tool/quartobasictool.html#cosmx-spatial-molecular-imager",
+    "title": "Basic CosMx Explorer Tool",
+    "section": "",
+    "text": "The CosMx Spatial Molecular Imager is a cutting-edge single-cell spatial transcriptomics and proteomics platform developed by Nanostring and later acquired by Bruker Spatial Biology. Its defining feature is the ability to detect whole transcriptome level (18,000+ plex) of RNA transcripts at subcellular resolution using cyclic in-situ hybridization of photocleavable fluorescent probe barcodes paired with digital imaging. Protein data can also be acquired, though only up to 64-plex currently.\nThe platform uses a fluorescent membrane marker to segment the cells by drawing polygons around their boundaries, then assigns the transcript counts to their respective cells. In the resulting data object, each cell contains its polygon geometry; the counts of each transcript detected within it; and any associated metadata. The subcellular X-Y coordinates of each individual transcript can be optionally included as seen in the image above, though that can result in a tremendously large data object.\nNanostring had been a pioneer in the field of spatial biology with the earlier development of the GeoMx Digital Spatial Profiler platform, which is still widely used today. This platform uses photocleavable oligonucleotide barcoding of antibodies to achieve simultaneous detection of 80+ protein targets, a massive leap from the upper limit of less than 10 which can be achieved in one round of antibody incubation through traditional immunofluorescent imaging techniques."
+  },
+  {
+    "objectID": "projects/basic_cosmx_tool/quartobasictool.html#basic-cosmx-explorer-tool",
+    "href": "projects/basic_cosmx_tool/quartobasictool.html#basic-cosmx-explorer-tool",
+    "title": "Basic CosMx Explorer Tool",
+    "section": "Basic CosMx Explorer Tool",
+    "text": "Basic CosMx Explorer Tool\nThis tool essentially provides a simple and intuitive GeoMx-inspired analysis workflow, while maintaining a key advantage of single-cell resolution data: Cell Typing.\nNavigate a plot of cell polygons colored by cell type, and draw a region of interest (ROI) using the polygon or rectangle tool. The right side will subsequently show the cell count and proportion of cells of each type within the two most recently selected regions.\nThe current state is obviously an extremely rudimentary tool, serving primarily as a foundation and proof-of-concept.\nMy tentative goal for this tool is to allow the user to perform pseudobulk differential expression and pathway analysis between those two regions, as well as to name the regions and download the subset of the data corresponding to those cells to help guide further analysis.\nI plan to include the ability to overlay the map on immunofluorescence or H&E images of the tissue.\nIt would also be cool to allow the user to group regions together and perform further analysis on various combinations of those groups, if the logistics of that are not too insanely complicated."
+  },
+  {
+    "objectID": "projects/basic_cosmx_tool/quartobasictool.html#cosmx-vs-geomx",
+    "href": "projects/basic_cosmx_tool/quartobasictool.html#cosmx-vs-geomx",
+    "title": "Basic CosMx Explorer Tool",
+    "section": "CosMx vs GeoMx",
+    "text": "CosMx vs GeoMx\n\nThe main difference between these platforms, particularly in terms of data collection and analysis strategies, is that GeoMx uses fluorescent imaging to guide the selection of data collection regions, but the actual x-y coordinates of the RNA/Protein data within that region are not known. The data is thus similar to bulk techniques that measure an aggregate of cells, and cannot distinguish between them. GeoMx does, however, allow for the precise selection of regions, so that the collection of cells being measured is biologically informative to the researcher’s interest. CosMx, in contrast, collects data of each specific cell and thus does not require such planning and foresight during data collection. In the image above, three manually drawn GeoMx collection regions guided by fluorescent staining can be seen on the left, compared to CosMx cell boundaries and subcellular transcripts seen on the right.\nBecause of its more intentional approach, GeoMx data analysis is generally quite straightforward. It can typically consist of differential gene/protein expression between groups of regions, followed by pathway enrichment analysis. The most common approach when planning a GeoMx experiment is essentially to ask: How is this region different than that region? The goal of the analysis in this case is to simply answer that question.\nCosMx, on the other hand, is much more geared towards exploration. Comprehensive data is collected on every gene in every cell, and then through exploratory data analysis, interesting insights can be discovered and cause the “question” to reveal itself. Sounds cool and exciting, but it raises one major problem: The monstrous size of the data, intense computation requirement, and lack of intuitive analysis tools cause the researchers to become overwhelmed and paralyzed. I have seen this problem time and time again.\nMillions of transcripts across tens of thousands of cells drown biological meaning in an ocean of noise. Analysts possess the ability to isolate meaningful cells to investigate, but lack the biological knowledge to do so. Researchers possess the biological knowledge of which cells should be investigated, but lack the analytic ability to do so.\nMy goal is to give them that ability."
+  },
+  {
+    "objectID": "projects/basic_cosmx_tool/quartobasictool.html#references",
+    "href": "projects/basic_cosmx_tool/quartobasictool.html#references",
+    "title": "Basic CosMx Explorer Tool",
+    "section": "References",
+    "text": "References\nThe data used above is the publicly avaible CosMx Human Pancreas WTX FFPE Dataset, available here.\nThis tool uses the leafly, seurat, sf and shiny R packages, source code will be included soon."
   }
 ]

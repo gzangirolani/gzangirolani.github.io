@@ -1,0 +1,67 @@
+---
+title: "Basic CosMx Explorer Tool"
+author: "Gabriel Zangirolani"
+description: "A basic interactive tool to explore cell type proportions in CosMx Data"
+date: 2026-06-08
+format: 
+  html:
+    grid:
+      body-width: 1500px
+execute: 
+  freeze: auto
+---
+
+## CosMx Spatial Molecular Imager
+
+![](cosmxoverview.png)
+
+The CosMx Spatial Molecular Imager is a cutting-edge single-cell spatial transcriptomics and proteomics platform developed by Nanostring and later acquired by Bruker Spatial Biology. Its defining feature is the ability to detect whole transcriptome level (18,000+ plex) of RNA transcripts at subcellular resolution using cyclic in-situ hybridization of photocleavable fluorescent probe barcodes paired with digital imaging. Protein data can also be acquired, though only up to 64-plex currently.
+
+The platform uses a fluorescent membrane marker to segment the cells by drawing polygons around their boundaries, then assigns the transcript counts to their respective cells. In the resulting data object, each cell contains its polygon geometry; the counts of each transcript detected within it; and any associated metadata. The subcellular X-Y coordinates of each individual transcript can be optionally included as seen in the image above, though that can result in a tremendously large data object.
+
+Nanostring had been a pioneer in the field of spatial biology with the earlier development of the GeoMx Digital Spatial Profiler platform, which is still widely used today. This platform uses photocleavable oligonucleotide barcoding of antibodies to achieve simultaneous detection of 80+ protein targets, a massive leap from the upper limit of less than 10 which can be achieved in one round of antibody incubation through traditional immunofluorescent imaging techniques. 
+
+## CosMx vs GeoMx
+
+![](geomxoverview.png)
+
+The main difference between these platforms, particularly in terms of data collection and analysis strategies, is that GeoMx uses fluorescent imaging to guide the selection of data collection regions, but the actual x-y coordinates of the RNA/Protein data within that region are not known. The data is thus similar to bulk techniques that measure an aggregate of cells, and cannot distinguish between them. GeoMx does, however, allow for the precise selection of regions, so that the collection of cells being measured is biologically informative to the researcher's interest. CosMx, in contrast, collects data of each specific cell and thus does not require such planning and foresight during data collection. In the image above, three manually drawn GeoMx collection regions guided by fluorescent staining can be seen on the left, compared to CosMx cell boundaries and subcellular transcripts seen on the right.
+
+Because of its more intentional approach, GeoMx data analysis is generally quite straightforward. It can typically consist of differential gene/protein expression between groups of regions, followed by pathway enrichment analysis. The most common approach when planning a GeoMx experiment is essentially to ask: How is this region different than that region? The goal of the analysis in this case is to simply answer that question.
+
+CosMx, on the other hand, is much more geared towards exploration. Comprehensive data is collected on every gene in every cell, and then through exploratory data analysis, interesting insights can be discovered and cause the "question" to reveal itself. Sounds cool and exciting, but it raises one major problem: The monstrous size of the data, intense computation requirement, and lack of intuitive analysis tools cause the researchers to become overwhelmed and paralyzed. I have seen this problem time and time again.
+
+Millions of transcripts across tens of thousands of cells drown biological meaning in an ocean of noise. Analysts possess the ability to isolate meaningful cells to investigate, but lack the biological knowledge to do so. Researchers possess the biological knowledge of which cells should be investigated, but lack the analytic ability to do so. 
+
+My goal is to give them that ability.
+
+## Basic CosMx Explorer Tool
+
+This tool essentially provides a simple and intuitive GeoMx-inspired analysis workflow, while maintaining a key advantage of single-cell resolution data: Cell Typing.
+
+Navigate a plot of cell polygons colored by cell type, and draw a region of interest (ROI) using the polygon or rectangle tool. The right side will subsequently show the cell count and proportion of cells of each type within the two most recently selected regions.
+
+The current state is obviously an extremely rudimentary tool, serving primarily as a foundation and proof-of-concept.
+
+My tentative goal for this tool is to allow the user to perform pseudobulk differential expression and pathway analysis between those two regions, as well as to name the regions and download the subset of the data corresponding to those cells to help guide further analysis.
+
+I plan to include the ability to overlay the map on immunofluorescence or H&E images of the tissue.
+
+It would also be cool to allow the user to group regions together and perform further analysis on various combinations of those groups, if the logistics of that are not too insanely complicated.
+
+<iframe
+  src="https://psn9q0-gabriel-zangirolani.shinyapps.io/simpleshinyapp/"
+  width="100%"
+  height="1000"
+  style="border:none;">
+</iframe>
+
+## References
+
+The data used above is the publicly avaible CosMx Human Pancreas WTX FFPE Dataset, available [here](https://brukerspatialbiology.com/products/cosmx-spatial-molecular-imager/ffpe-dataset/cosmx-smi-human-pancreas-ffpe-dataset/).
+
+This tool uses the leafly, seurat, sf and shiny R packages, source code will be included soon.
+
+
+
+

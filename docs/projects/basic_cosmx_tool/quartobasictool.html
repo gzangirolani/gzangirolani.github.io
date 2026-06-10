@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Gabriel Zangirolani">
+<meta name="dcterms.date" content="2026-06-08">
+<meta name="description" content="A basic interactive tool to explore cell type proportions in CosMx Data">
 
-<title>Projects – Gabriel Zangirolani</title>
+<title>Basic CosMx Explorer Tool – Gabriel Zangirolani</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2a7528f117d075273fca3a0b09f3bef2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-2d0fc03cad84b0db2a51ddfe0e1dd43e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +69,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +81,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Gabriel Zangirolani</span>
     </a>
   </div>
@@ -149,11 +92,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./projects.html" aria-current="page"> 
+    <a class="nav-link" href="../../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
 </ul>
@@ -167,22 +110,48 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cosmx-spatial-molecular-imager" id="toc-cosmx-spatial-molecular-imager" class="nav-link active" data-scroll-target="#cosmx-spatial-molecular-imager">CosMx Spatial Molecular Imager</a></li>
+  <li><a href="#cosmx-vs-geomx" id="toc-cosmx-vs-geomx" class="nav-link" data-scroll-target="#cosmx-vs-geomx">CosMx vs GeoMx</a></li>
+  <li><a href="#basic-cosmx-explorer-tool" id="toc-basic-cosmx-explorer-tool" class="nav-link" data-scroll-target="#basic-cosmx-explorer-tool">Basic CosMx Explorer Tool</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Projects</h1>
+<h1 class="title">Basic CosMx Explorer Tool</h1>
 </div>
 
+<div>
+  <div class="description">
+    A basic interactive tool to explore cell type proportions in CosMx Data
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Gabriel Zangirolani </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 8, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -192,73 +161,42 @@ window.Quarto = {
 </header>
 
 
+<section id="cosmx-spatial-molecular-imager" class="level2">
+<h2 class="anchored" data-anchor-id="cosmx-spatial-molecular-imager">CosMx Spatial Molecular Imager</h2>
+<p><img src="cosmxoverview.png" class="img-fluid"></p>
+<p>The CosMx Spatial Molecular Imager is a cutting-edge single-cell spatial transcriptomics and proteomics platform developed by Nanostring and later acquired by Bruker Spatial Biology. Its defining feature is the ability to detect whole transcriptome level (18,000+ plex) of RNA transcripts at subcellular resolution using cyclic in-situ hybridization of photocleavable fluorescent probe barcodes paired with digital imaging. Protein data can also be acquired, though only up to 64-plex currently.</p>
+<p>The platform uses a fluorescent membrane marker to segment the cells by drawing polygons around their boundaries, then assigns the transcript counts to their respective cells. In the resulting data object, each cell contains its polygon geometry; the counts of each transcript detected within it; and any associated metadata. The subcellular X-Y coordinates of each individual transcript can be optionally included as seen in the image above, though that can result in a tremendously large data object.</p>
+<p>Nanostring had been a pioneer in the field of spatial biology with the earlier development of the GeoMx Digital Spatial Profiler platform, which is still widely used today. This platform uses photocleavable oligonucleotide barcoding of antibodies to achieve simultaneous detection of 80+ protein targets, a massive leap from the upper limit of less than 10 which can be achieved in one round of antibody incubation through traditional immunofluorescent imaging techniques.</p>
+</section>
+<section id="cosmx-vs-geomx" class="level2">
+<h2 class="anchored" data-anchor-id="cosmx-vs-geomx">CosMx vs GeoMx</h2>
+<p><img src="geomxoverview.png" class="img-fluid"></p>
+<p>The main difference between these platforms, particularly in terms of data collection and analysis strategies, is that GeoMx uses fluorescent imaging to guide the selection of data collection regions, but the actual x-y coordinates of the RNA/Protein data within that region are not known. The data is thus similar to bulk techniques that measure an aggregate of cells, and cannot distinguish between them. GeoMx does, however, allow for the precise selection of regions, so that the collection of cells being measured is biologically informative to the researcher’s interest. CosMx, in contrast, collects data of each specific cell and thus does not require such planning and foresight during data collection. In the image above, three manually drawn GeoMx collection regions guided by fluorescent staining can be seen on the left, compared to CosMx cell boundaries and subcellular transcripts seen on the right.</p>
+<p>Because of its more intentional approach, GeoMx data analysis is generally quite straightforward. It can typically consist of differential gene/protein expression between groups of regions, followed by pathway enrichment analysis. The most common approach when planning a GeoMx experiment is essentially to ask: How is this region different than that region? The goal of the analysis in this case is to simply answer that question.</p>
+<p>CosMx, on the other hand, is much more geared towards exploration. Comprehensive data is collected on every gene in every cell, and then through exploratory data analysis, interesting insights can be discovered and cause the “question” to reveal itself. Sounds cool and exciting, but it raises one major problem: The monstrous size of the data, intense computation requirement, and lack of intuitive analysis tools cause the researchers to become overwhelmed and paralyzed. I have seen this problem time and time again.</p>
+<p>Millions of transcripts across tens of thousands of cells drown biological meaning in an ocean of noise. Analysts possess the ability to isolate meaningful cells to investigate, but lack the biological knowledge to do so. Researchers possess the biological knowledge of which cells should be investigated, but lack the analytic ability to do so.</p>
+<p>My goal is to give them that ability.</p>
+</section>
+<section id="basic-cosmx-explorer-tool" class="level2">
+<h2 class="anchored" data-anchor-id="basic-cosmx-explorer-tool">Basic CosMx Explorer Tool</h2>
+<p>This tool essentially provides a simple and intuitive GeoMx-inspired analysis workflow, while maintaining a key advantage of single-cell resolution data: Cell Typing.</p>
+<p>Navigate a plot of cell polygons colored by cell type, and draw a region of interest (ROI) using the polygon or rectangle tool. The right side will subsequently show the cell count and proportion of cells of each type within the two most recently selected regions.</p>
+<p>The current state is obviously an extremely rudimentary tool, serving primarily as a foundation and proof-of-concept.</p>
+<p>My tentative goal for this tool is to allow the user to perform pseudobulk differential expression and pathway analysis between those two regions, as well as to name the regions and download the subset of the data corresponding to those cells to help guide further analysis.</p>
+<p>I plan to include the ability to overlay the map on immunofluorescence or H&amp;E images of the tissue.</p>
+<p>It would also be cool to allow the user to group regions together and perform further analysis on various combinations of those groups, if the logistics of that are not too insanely complicated.</p>
+<iframe src="https://psn9q0-gabriel-zangirolani.shinyapps.io/simpleshinyapp/" width="100%" height="1000" style="border:none;">
+</iframe>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>The data used above is the publicly avaible CosMx Human Pancreas WTX FFPE Dataset, available <a href="https://brukerspatialbiology.com/products/cosmx-spatial-molecular-imager/ffpe-dataset/cosmx-smi-human-pancreas-ffpe-dataset/">here</a>.</p>
+<p>This tool uses the leafly, seurat, sf and shiny R packages, source code will be included soon.</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1780902000000" data-listing-file-modified-sort="1781058123222" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="781">
-<div class="thumbnail">
-<p><a href="./projects/basic_cosmx_tool/quartobasictool.html" class="no-external"></a></p><a href="./projects/basic_cosmx_tool/quartobasictool.html" class="no-external">
-<p class="card-img-top"><img src="projects\basic_cosmx_tool\cosmxoverview.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./projects/basic_cosmx_tool/quartobasictool.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./projects/basic_cosmx_tool/quartobasictool.html" class="no-external">Basic CosMx Explorer Tool</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./projects/basic_cosmx_tool/quartobasictool.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./projects/basic_cosmx_tool/quartobasictool.html" class="no-external">A basic interactive tool to explore cell type proportions in CosMx Data</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./projects/basic_cosmx_tool/quartobasictool.html" class="no-external">
-<div class="listing-date">
-Jun 8, 2026
-</div>
-<div class="listing-author">
-Gabriel Zangirolani
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1778050800000" data-listing-file-modified-sort="1778875102929" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1462">
-<div class="thumbnail">
-<p><a href="./projects/BMI_525_graph/525graph_zangirolani.html" class="no-external"></a></p><a href="./projects/BMI_525_graph/525graph_zangirolani.html" class="no-external">
-<p><img loading="lazy" src="./projects/BMI_525_graph/spaghettipreview.png" class="thumbnail-image"></p>
-</a><p><a href="./projects/BMI_525_graph/525graph_zangirolani.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./projects/BMI_525_graph/525graph_zangirolani.html" class="no-external">Spaghetti Plots</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./projects/BMI_525_graph/525graph_zangirolani.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./projects/BMI_525_graph/525graph_zangirolani.html" class="no-external">A brief exploration of Spaghetti Plots and a real world example</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./projects/BMI_525_graph/525graph_zangirolani.html" class="no-external">
-<div class="listing-date">
-May 6, 2026
-</div>
-<div class="listing-author">
-Gabriel Zangirolani
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
