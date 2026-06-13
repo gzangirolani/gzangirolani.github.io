@@ -52,7 +52,7 @@ It would also be cool to allow the user to group regions together and perform fu
 <iframe
   src="https://psn9q0-gabriel-zangirolani.shinyapps.io/simpleshinyapp/"
   width="100%"
-  height="400"
+  height="850"
   style="border:none;">
 </iframe>
 
@@ -60,8 +60,253 @@ It would also be cool to allow the user to group regions together and perform fu
 
 The data used above is the publicly avaible CosMx Human Pancreas WTX FFPE Dataset, available [here](https://brukerspatialbiology.com/products/cosmx-spatial-molecular-imager/ffpe-dataset/cosmx-smi-human-pancreas-ffpe-dataset/).
 
-This tool uses the leafly, seurat, sf and shiny R packages, source code will be included soon.
+
+## Methods
+
+Here is an overview of the preparation of cosmx data and transformation into an interactive shiny application.
+
+These are the packages that were used
 
 
+```{r}
+#| eval: false
+
+library(tidyverse)
+library(leaflet)
+library(sf)
+library(here)
+library(Seurat)
+library(SeuratObject)
+library(shiny)
+
+```
+
+We first begin by loading the Seurat object from the aforementioned public dataset and adding the provided cell type annotations
+
+```{r}
+#| eval: false
+
+panc <- readRDS(file = here("data/Seurat_Pancreas_withTranscripts.rds"))
+
+meta <- readRDS(here("data/Pancreas_celltype_InSituType.rds"))
+panc@meta.data$types <- meta[rownames(panc@meta.data), "cell_types"]
+panc@meta.data$types[is.na(panc@meta.data$types)] <- "QC_dropped"
+
+# Update seurat object and drop cells that failed nanostring's QC
+
+keep <- meta$cell_ID
+
+panc <- panc[, keep]
+
+panc_updated <- UpdateSeuratObject(panc)
+
+saveRDS(panc_updated, file = here("data/panc_updated.rds"))
+
+panc <- subset(panc_updated, subset = types != "QC_dropped")
+
+
+```
+
+
+Now we will remove the cell ids and polygons and convert it to an sf object
+
+```{r}
+#| eval: false
+
+img <- panc@images[[1]]
+
+seg <- img@boundaries$segmentation
+
+# add cell types
+
+sf_obj$cell_type <- panc@meta.data$types
+
+```
+
+Now we're ready to use this object with the shiny app. Let's generate a global color palette based on cell types.
+
+```{r}
+#| eval: false
+
+cell_types <- sort(unique(sf_obj$cell_type))
+
+pal <- colorFactor(
+  palette = "Set3",
+  domain = sf_obj$cell_types
+)
+
+cell_colors <- setNames(
+  pal(cell_types),
+  cell_types
+)
+
+```
+
+
+Define a simple user interface
+
+```{r}
+#| eval: false
+
+ui <- fluidPage(
+  
+  fluidRow(
+    
+    column(
+      width = 9,
+      leafletOutput("map", height = 900)
+    ),
+    
+    column(
+      width = 2,
+      
+      "ROI 1 Cell count:",
+      
+      textOutput("selected1", inline = T),
+      
+      plotOutput("stratified1")
+    ),
+    
+    column(
+      width = 2,
+      
+      "ROI 2 Cell count:",
+      
+      textOutput("selected2", inline = T),
+      
+      plotOutput("stratified2")
+    ),
+    
+  )
+)
+
+```
+
+Create the shiny app that generates the interactive leaflet plot and subsequent cell type stratification plots after user selects two regions of interest
+
+```{r}
+#| eval: false
+
+server <- function(input, output, session) {
+  
+  output$map <- renderLeaflet({
+    leaflet(sf_obj) %>%
+      addPolygons(
+        fillColor = ~pal(cell_type),
+        weight = 0.2,
+        fillOpacity = 0.7
+      ) %>%
+      addLegend(
+        pal = pal,
+        values = ~cell_type,
+        title = "Cell Type"
+      ) %>%
+      addDrawToolbar(
+        targetGroup = "roi",
+        polygonOptions = drawPolygonOptions(),
+        rectangleOptions = drawRectangleOptions(),
+        editOptions = editToolbarOptions(),
+        polylineOptions = FALSE,
+        markerOptions = FALSE,
+        circleMarkerOptions = FALSE,
+        circleOptions = FALSE
+      )
+    
+  })
+  
+  rois <- reactiveValues(list = list())
+  
+  observeEvent(input$map_draw_new_feature, {
+    
+    roi <- input$map_draw_new_feature %>% 
+      
+      jsonlite::toJSON(auto_unbox = TRUE) %>% 
+      
+      geojsonio::geojson_sf()
+    
+    st_crs(roi) <- st_crs(sf_obj)
+    
+    idx <- length(rois$list) + 1
+    rois$list[[idx]] <- roi
+    
+  })
+  
+  last_two_rois <- reactive({
+    
+    req(length(rois$list) >= 2)
+    
+    tail(rois$list, 2)
+  })
+  
+  roi_table <- function(roi) {
+    
+    cells <- sf_obj[lengths(st_intersects(sf_obj, roi)) > 0, ]
+    
+    df <- as.data.frame(prop.table(table(cells$cell_type)))
+    colnames(df) <- c("cell_type", "prop")
+    
+    df
+  }
+  
+  output$selected1 <- renderText({
+    
+    cells <- sf_obj[lengths(st_intersects(sf_obj, last_two_rois()[[1]])) > 0, ]
+    
+    nrow(cells)
+    
+  })
+  
+  output$selected2 <- renderText({
+    
+    cells <- sf_obj[lengths(st_intersects(sf_obj, last_two_rois()[[2]])) > 0, ]
+    
+    nrow(cells)
+    
+  })
+
+  output$stratified1 <- renderPlot({
+    
+    roi <- last_two_rois()[[1]]
+    
+    df <- roi_table(roi)
+    
+    ggplot(df, aes(x = "", y = prop, fill = cell_type)) +
+      geom_col(width = 1, alpha = .7) +
+      scale_y_continuous(labels = scales::percent_format()) +
+      labs(x = NULL, y = "Proportion", fill = "Cell Type") +
+      scale_fill_manual(values = cell_colors) +
+      theme_minimal()
+    
+  })
+  
+  output$stratified2 <- renderPlot({
+    
+    roi <- last_two_rois()[[2]]
+    
+    df <- roi_table(roi)
+    
+    ggplot(df, aes(x = "", y = prop, fill = cell_type)) +
+      geom_col(width = 1, alpha = .7) +
+      scale_y_continuous(labels = scales::percent_format()) +
+      labs(x = NULL, y = "Proportion", fill = "Cell Type") +
+      scale_fill_manual(values = cell_colors) +
+      theme_minimal()
+    
+  })
+  
+}
+
+
+```
+
+
+That's it! Now just run and deploy the shiny app
+
+```{r}
+#| eval: false
+
+shinyApp(ui, server)
+
+```
 
 

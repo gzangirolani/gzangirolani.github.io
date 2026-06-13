@@ -1,0 +1,90 @@
+---
+title: "How tall and wide are paintings at the Museum of Modern Art?"
+author: "Gabriel Zangirolani"
+description: "Exploring the aspect ratios of paintings at the Museum of Modern Art"
+date: 2026-04-08
+format: html
+execute: 
+  freeze: auto
+---
+
+## Introduction
+
+We will be visualizing the aspect ratios of paintings in the Museum of Modern Art with the goal of understanding what visual dimensions are most pleasing to the human eye
+
+## Data preparation
+
+We will be using a dataset provided by Steven Bedrick as part of my BMI 525 course.
+
+It contains information about 2,253 paintings at the Musem of Modern Art.
+
+
+Let's load the data and required packages
+
+```{r}
+
+library(readr)
+library(here)
+library(tidyverse)
+library(dplyr)
+library(readr)
+library(ggthemes)
+
+
+moma <- read_csv(here("projects", "viz2-moma", "data", "artworks-cleaned.csv"))
+
+```
+
+Now let's add information about the aspect rations of the paintings
+
+```{r}
+
+moma_dim <- moma %>% 
+  filter(height_cm < 600, width_cm < 760) %>% 
+  mutate(hw_ratio = height_cm / width_cm,
+         hw_cat = case_when(
+           hw_ratio > 1 ~ "taller than wide",
+           hw_ratio < 1 ~ "wider than tall",
+           hw_ratio == 1 ~ "perfect square"
+         ))
+
+```
+
+
+## Plotting
+
+Let's plot the painting dimensions colored by aspect ratio
+
+```{r}
+
+ggplot(moma_dim, aes(x = width_cm, y = height_cm, colour = hw_cat)) +
+  geom_point(alpha = .5) +
+  ggtitle("MoMA Paintings, Tall and Wide") +
+  scale_colour_manual(name = "",
+                      values = c("gray50", "#FF9900", "#B14CF0")) +
+  theme_fivethirtyeight() +
+  theme(axis.title = element_text()) +
+  labs(x = "Width", y = "Height") 
+
+```
+As you can see, paintings that are much wider than they are tall are preferred to paintings that are much taller than they are wide. This makes sense when thinking about the aspect ratio of human vision.
+
+Let's have look at the distrivbutions using a violin plot
+
+```{r}
+
+moma_dim_wide <- moma_dim %>% filter(hw_cat == "wider than tall") %>% 
+  mutate(hw_ratio = width_cm/height_cm)
+
+moma_dim_long <- moma_dim %>% filter(hw_cat == "taller than wide")
+
+moma_dim_comp <- full_join(moma_dim_long, moma_dim_wide)
+
+
+ggplot(moma_dim_comp, aes(x = hw_cat, y = hw_ratio, colour = hw_cat)) +
+  geom_violin() +
+  ylim(0.5, 2.5)
+
+```
+
+They look very similar, although it seems that for wider paintings there is a peak at twice as wide which doesn't quite exist for the taller paintings. This suggests that twice as wide is a specifically aesthetically pleasing proportion that does not work in the same way for twice as tall.

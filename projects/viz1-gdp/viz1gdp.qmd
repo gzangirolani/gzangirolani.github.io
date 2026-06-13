@@ -1,0 +1,228 @@
+---
+title: "GDP Per Capita"
+author: "Gabriel Zangirolani"
+description: "An exploration and visualization of GDP per capita across countries within continents"
+date: 2026-04-22
+format: html
+execute: 
+  freeze: auto
+---
+
+## Introduction
+
+This is a visualization of the countries with the highest change in GDP per capita from 1952 to 2007
+
+## Data preparation
+
+The dataset we will be using for this is gapminder. Let's load required packages and the dataset itself
+
+```{r}
+library(tidyverse)
+library(gapminder)
+
+gapminder <- gapminder
+```
+
+Now let's create a function to calculate the change in gdp from 1952 to 2007 and select the number of highest gdp change countries we want to keep.
+
+```{r}
+
+gdp_delta <- function(data, cont, top) {
+  
+  delta <- filter(data, 
+            continent == cont,
+            year %in% c(1952, 2007)) %>% 
+  group_by(country) %>% 
+  summarize(delta = abs(gdpPercap[year == 2007] - gdpPercap[year == 1952])) %>% 
+  arrange(desc(delta)) %>% 
+  select(country, delta) %>% 
+  slice_head(n = top)
+  
+  countries <- delta$country
+  
+  g_trim <- data %>% filter(country %in% countries)
+  
+  left_join(g_trim, delta, by = "country")
+
+}      
+
+```
+
+Now we'll split the data by continents and calculate the changes within each continent.
+
+Note that we'll be keeping the data without the calculated change so that later we can plot all countries but only highlight the most changed ones.
+
+```{r}
+
+# Asia
+
+g_asia <- gapminder %>% filter(continent == "Asia")
+
+gdp_asia <- gdp_delta(data = gapminder, cont = "Asia", top = 6)
+
+# Americas
+
+g_americas <- gapminder %>% filter(continent == "Americas")
+
+gdp_americas <- gdp_delta(data = gapminder, cont = "Americas", top = 6)
+
+# Africa
+
+g_africa <- gapminder %>% filter(continent == "Africa")
+
+gdp_africa <- gdp_delta(data = gapminder, cont = "Africa", top = 6)
+
+# Europe
+
+g_europe <- gapminder %>% filter(continent == "Europe")
+
+gdp_europe <- gdp_delta(data = gapminder, cont = "Europe", top = 6)
+
+# Oceania
+
+g_oceania <- gapminder %>% filter(continent == "Oceania")
+
+gdp_oceania <- gdp_delta(data = gapminder, cont = "Oceania", top = 6)
+
+```
+
+## Plotting
+
+Let's make a separate line plot for each continent, highlighting the top 6 countries. 
+
+We'll also add points to only the top 6 countries.
+
+```{r, fig.width=9}
+
+# Asia
+
+ ggplot() +
+  geom_line(
+    data = g_asia,
+    aes(x = year, y = gdpPercap, group = country),
+    color = "grey",
+    alpha = .3,
+    linewidth = .5) +
+  geom_point(
+    data = gdp_asia,
+    aes(x = year, y = gdpPercap, color = country),
+    size = .5) +  
+  geom_line(
+    data = gdp_asia,
+    aes(x = year, y = gdpPercap, color = country)) +
+  labs(title = "Countries in Asia with the highest change in GDP from 1952 to 2007",
+       subtitle = "All other countries in Asia shown in grey",
+       x = "Year",
+       y = "GDP per capita",
+       color = "Country") +
+    theme_minimal() 
+
+```
+
+```{r, fig.width=9}
+
+# Americas
+
+ggplot() +
+  geom_line(
+    data = g_americas,
+    aes(x = year, y = gdpPercap, group = country),
+    color = "grey",
+    alpha = .3,
+    linewidth = .5) +
+  geom_point(
+    data = gdp_americas,
+    aes(x = year, y = gdpPercap, color = country),
+    size = .5) +  
+  geom_line(
+    data = gdp_americas,
+    aes(x = year, y = gdpPercap, color = country)) +
+  labs(title = "Countries in the Americas with the highest change in GDP from 1952 to 2007",
+       subtitle = "All other countries in the Americas shown in grey",
+       x = "Year",
+       y = "GDP per capita",
+       color = "Country") +
+    theme_minimal() 
+
+```
+
+```{r, fig.width=9}
+
+# Africa
+
+  ggplot() +
+  geom_line(
+    data = g_africa,
+    aes(x = year, y = gdpPercap, group = country),
+    color = "grey",
+    alpha = .3,
+    linewidth = .5) +
+  geom_point(
+    data = gdp_africa,
+    aes(x = year, y = gdpPercap, color = country),
+    size = .5) +  
+  geom_line(
+    data = gdp_africa,
+    aes(x = year, y = gdpPercap, color = country)) +
+  labs(title = "Countries in Africa with the highest change in GDP from 1952 to 2007",
+       subtitle = "All other countries in Africa shown in grey",
+       x = "Year",
+       y = "GDP per capita",
+       color = "Country") +
+    theme_minimal() 
+
+```
+
+```{r, fig.width=9}
+
+# Europe
+
+ggplot() +
+  geom_line(
+    data = g_europe,
+    aes(x = year, y = gdpPercap, group = country),
+    color = "grey",
+    alpha = .3,
+    linewidth = .5) +
+  geom_point(
+    data = gdp_europe,
+    aes(x = year, y = gdpPercap, color = country),
+    size = .5) +  
+  geom_line(
+    data = gdp_europe,
+    aes(x = year, y = gdpPercap, color = country)) +
+  labs(title = "Countries in Europe with the highest change in GDP from 1952 to 2007",
+       subtitle = "All other countries in Europe shown in grey",
+       x = "Year",
+       y = "GDP per capita",
+       color = "Country") +
+    theme_minimal()
+
+```
+
+```{r, fig.width=9}
+
+# Oceania
+
+ggplot() +
+  geom_line(
+    data = g_oceania,
+    aes(x = year, y = gdpPercap, group = country),
+    color = "grey",
+    alpha = .3,
+    linewidth = .5) +
+  geom_point(
+    data = gdp_oceania,
+    aes(x = year, y = gdpPercap, color = country),
+    size = .5) +  
+  geom_line(
+    data = gdp_oceania,
+    aes(x = year, y = gdpPercap, color = country)) +
+  labs(title = "Change in GDP from 1952 to 2007 in countries in Oceania",
+       x = "Year",
+       y = "GDP per capita",
+       color = "Country") +
+    theme_minimal()
+
+```
+

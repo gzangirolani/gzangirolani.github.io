@@ -1,0 +1,88 @@
+---
+title: "US Roundabout Construction Explorere Tool"
+author: "Gabriel Zangirolani"
+description: "A basic interactive tool to explore US Roundabout construction over time"
+date: 2026-05-20
+image: image.png
+format: 
+  html:
+    grid:
+      body-width: 1500px
+execute: 
+  freeze: auto
+---
+## Introduction
+
+This is a simple shiny app that allows the user to input a range of years and see the roundabouts that were constructed in the US during those years
+
+## The App
+
+<iframe
+  src="https://psn9q0-gabriel-zangirolani.shinyapps.io/project1/"
+  width="100%"
+  height="480"
+  style="border:none;">
+</iframe>
+
+## Methods
+
+[This](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-12-16/readme.md) is the dataset that was used for this app, from Tidy Tuesdays
+
+It has been cleaned up and the coordinates have been converted to work with the USMAP function.
+
+This is the code for the shiny app:
+
+```{r}
+#| eval: false
+
+load("rb_cs_usmap.rda")
+
+# filter out NA in year completed
+
+rb <- rb_cs_usmap[!is.na(rb_cs_usmap$year_completed), ]
+
+min(rb$year_completed)
+
+# min is 1791
+
+max(rb$year_completed)
+
+# max is 2023
+
+# let's make the plot function
+
+rbPlot <- function(years) {
+  
+rb_years <- rb[rb$year_completed >= years[1] & rb$year_completed <= years[2] , ]
+
+plot_usmap(regions = "states") +
+  geom_sf(data = rb_years, aes(color = year_completed)) + 
+  scale_color_continuous(low = "green", high = "red", name = "Year Completed")
+  
+}
+
+ui <- fluidPage(
+  titlePanel("US Roundabouts by Year Completed"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("years", label="Years", min=1791, max=2023, value=c(1900, 2000))
+      
+    ),
+    mainPanel(
+      plotOutput("yearPlot")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  output$yearPlot <- renderPlot({rbPlot(input$years)})
+  
+}
+
+shinyApp(ui = ui, server = server)
+
+
+```
+
+
