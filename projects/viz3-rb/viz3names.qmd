@@ -1,5 +1,5 @@
 ---
-title: "US Roundabout Construction Explorere Tool"
+title: "US Roundabout Construction Explorer Tool"
 author: "Gabriel Zangirolani"
 description: "A basic interactive tool to explore US Roundabout construction over time"
 date: 2026-05-20
