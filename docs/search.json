@@ -4,7 +4,7 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Basic CosMx Explorer Tool\n\n\n\n\n\nA basic interactive tool to explore cell type proportions in CosMx Data\n\n\n\n\n\nJun 8, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\n\n\n\n\n\n\nGDP Per Capita\n\n\n\n\n\nAn exploration and visualization of GDP per capita across countries within continents\n\n\n\n\n\nApr 22, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\n\n\n\n\n\n\nHow tall and wide are paintings at the Museum of Modern Art?\n\n\n\n\n\nExploring the aspect ratios of paintings at the Museum of Modern Art\n\n\n\n\n\nApr 8, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\n\n\n\n\n\n\nSpaghetti Plots\n\n\n\n\n\nA brief exploration of Spaghetti Plots and a real world example\n\n\n\n\n\nMay 6, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\n\n\n\n\n\n\nUS Roundabout Construction Explorere Tool\n\n\n\n\n\nA basic interactive tool to explore US Roundabout construction over time\n\n\n\n\n\nMay 20, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\nNo matching items"
+    "text": "Basic CosMx Explorer Tool\n\n\n\n\n\nA basic interactive tool to explore cell type proportions in CosMx Data\n\n\n\n\n\nJun 8, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\n\n\n\n\n\n\nGDP Per Capita\n\n\n\n\n\nAn exploration and visualization of GDP per capita across countries within continents\n\n\n\n\n\nApr 22, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\n\n\n\n\n\n\nHow tall and wide are paintings at the Museum of Modern Art?\n\n\n\n\n\nExploring the aspect ratios of paintings at the Museum of Modern Art\n\n\n\n\n\nApr 8, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\n\n\n\n\n\n\nSpaghetti Plots\n\n\n\n\n\nA brief exploration of Spaghetti Plots and a real world example\n\n\n\n\n\nMay 6, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\n\n\n\n\n\n\nUS Roundabout Construction Explorer Tool\n\n\n\n\n\nA basic interactive tool to explore US Roundabout construction over time\n\n\n\n\n\nMay 20, 2026\n\n\nGabriel Zangirolani\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -163,28 +163,28 @@
   {
     "objectID": "projects/viz3-rb/viz3names.html",
     "href": "projects/viz3-rb/viz3names.html",
-    "title": "US Roundabout Construction Explorere Tool",
+    "title": "US Roundabout Construction Explorer Tool",
     "section": "",
     "text": "This is a simple shiny app that allows the user to input a range of years and see the roundabouts that were constructed in the US during those years"
   },
   {
     "objectID": "projects/viz3-rb/viz3names.html#introduction",
     "href": "projects/viz3-rb/viz3names.html#introduction",
-    "title": "US Roundabout Construction Explorere Tool",
+    "title": "US Roundabout Construction Explorer Tool",
     "section": "",
     "text": "This is a simple shiny app that allows the user to input a range of years and see the roundabouts that were constructed in the US during those years"
   },
   {
     "objectID": "projects/viz3-rb/viz3names.html#the-app",
     "href": "projects/viz3-rb/viz3names.html#the-app",
-    "title": "US Roundabout Construction Explorere Tool",
+    "title": "US Roundabout Construction Explorer Tool",
     "section": "The App",
     "text": "The App"
   },
   {
     "objectID": "projects/viz3-rb/viz3names.html#methods",
     "href": "projects/viz3-rb/viz3names.html#methods",
-    "title": "US Roundabout Construction Explorere Tool",
+    "title": "US Roundabout Construction Explorer Tool",
     "section": "Methods",
     "text": "Methods\nThis is the dataset that was used for this app, from Tidy Tuesdays\nIt has been cleaned up and the coordinates have been converted to work with the USMAP function.\nThis is the code for the shiny app:\n\nload(\"rb_cs_usmap.rda\")\n\n# filter out NA in year completed\n\nrb &lt;- rb_cs_usmap[!is.na(rb_cs_usmap$year_completed), ]\n\nmin(rb$year_completed)\n\n# min is 1791\n\nmax(rb$year_completed)\n\n# max is 2023\n\n# let's make the plot function\n\nrbPlot &lt;- function(years) {\n  \nrb_years &lt;- rb[rb$year_completed &gt;= years[1] & rb$year_completed &lt;= years[2] , ]\n\nplot_usmap(regions = \"states\") +\n  geom_sf(data = rb_years, aes(color = year_completed)) + \n  scale_color_continuous(low = \"green\", high = \"red\", name = \"Year Completed\")\n  \n}\n\nui &lt;- fluidPage(\n  titlePanel(\"US Roundabouts by Year Completed\"),\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"years\", label=\"Years\", min=1791, max=2023, value=c(1900, 2000))\n      \n    ),\n    mainPanel(\n      plotOutput(\"yearPlot\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n  \n  output$yearPlot &lt;- renderPlot({rbPlot(input$years)})\n  \n}\n\nshinyApp(ui = ui, server = server)"
   }
